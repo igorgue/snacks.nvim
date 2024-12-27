@@ -10,12 +10,16 @@ M.meta = {
 ---@class snacks.quickfile.Config
 local defaults = {
   -- any treesitter langs to exclude
+  enabled = false,
   exclude = { "latex" },
 }
 
 ---@private
 function M.setup()
   local opts = Snacks.config.get("quickfile", defaults)
+  if not opts.enabled then
+    return
+  end
   -- Skip if we already entered vim
   if vim.v.vim_did_enter == 1 then
     return
